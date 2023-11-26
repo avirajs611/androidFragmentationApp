@@ -13,6 +13,14 @@ class CountViewModel: ViewModel(){
         mutableCountLiveData.value = 0
     }
 
+    fun increment(){
+        mutableCountLiveData.value = mutableCountLiveData.value?.plus(1)
+    }
+
+    fun decrement(){
+        mutableCountLiveData.value = mutableCountLiveData.value?.minus(1)
+    }
+
     fun getMutableData(): LiveData<Int> {
         return mutableCountLiveData
     }

@@ -26,6 +26,7 @@ class FirstFragment : Fragment() {
     private val binding get() = _binding!!
 
     // Added manually
+    // Binding CountViewModel
     private val countViewModel: CountViewModel by activityViewModels()
    // private val countViewModel: CountViewModel by viewModels()
 
@@ -49,10 +50,17 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
-        countViewModel.getMutableData().observe(viewLifecycleOwner, Observer { set ->
-            Log.i("singhinusa", "Received value : " + set)
-            Toast.makeText(view.context, "Received value : " + set, Toast.LENGTH_SHORT).show()
-            // update the selected filters UI 
+        // Added Manualy
+        // Performing increment operation in first fragment
+        // Here we update the count value
+        binding.incrementButton.setOnClickListener {
+            countViewModel.increment()
+        }
+
+        countViewModel.getMutableData().observe(viewLifecycleOwner, Observer { incomingValue ->
+            // update the selected filters UI
+            // Here we reflect the changes to the app
+            binding.textviewFirst.text = "Count : " + incomingValue
         })
 
     }
